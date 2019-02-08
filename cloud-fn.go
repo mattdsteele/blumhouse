@@ -3,6 +3,7 @@ import (
 	"context"
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 // PubSubMessage is the payload of a Pub/Sub event. Please refer to the docs for
@@ -11,11 +12,13 @@ type Message struct {
 	Data []byte `json:"data"`
 }
 
-func TwitterPurge(ctx context.Context, m Message) error {
+func TwitterPurgeFiredHuskers(ctx context.Context, m Message) error {
 	payload := string(m.Data)
-	tweetsToDelete, _ := strconv.Atoi(payload)
+	params := strings.Split(payload, ",")
+	tweetsToDelete, _ := strconv.Atoi(params[0])
+	daysToKeep, _ := strconv.Atoi(params[1])
 	fmt.Println(payload)
-	InitArchiver("firedhuskers").ArchiveTweets(tweetsToDelete)
+	InitArchiver("firedhuskers").ArchiveTweets(tweetsToDelete, daysToKeep)
 	return nil
 }
 

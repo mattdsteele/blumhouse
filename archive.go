@@ -2,6 +2,7 @@ package blumhouse
 import (
 	"fmt"
 	"sync"
+	"time"
 )
 
 type Archiver struct {
@@ -19,8 +20,8 @@ func InitArchiver(screenname string) (archiver Archiver) {
 	return archiver
 }
 
-func (a Archiver) ArchiveTweets(numTweets int) {
-	tweets := a.GetTweets(numTweets)
+func (a Archiver) ArchiveTweets(numTweets int, daysToDelete int) {
+	tweets := a.GetTweets(numTweets, daysToDelete)
 	var wg sync.WaitGroup
 	wg.Add(len(tweets))
 	for _, tweet := range tweets {
@@ -28,8 +29,20 @@ func (a Archiver) ArchiveTweets(numTweets int) {
 	}
 	wg.Wait()
 }
-func (a Archiver) GetTweets(numTweets int) []Tweet {
-	tweets := a.twitter.ToTweets(a.twitter.Timeline(a.screenname, numTweets))
+func (a Archiver) GetTweets(numTweets, daysToDelete int) (tweets []Tweet) {
+	safeTweetTime := time.Now().AddDate(0, 0, -daysToDelete)
+	safeTweets := 0
+	allTweets := a.twitter.ToTweets(a.twitter.Timeline(a.screenname, numTweets))
+	for _, tweet := range allTweets {
+		if tweet.Date.Before(safeTweetTime) {
+			tweets = append(tweets, tweet)
+		} else {
+			safeTweets++
+		}
+	}
+	if safeTweets > 0 {
+		fmt.Println(safeTweets, "tweets safe for now")
+	}
 	return tweets
 
 }
