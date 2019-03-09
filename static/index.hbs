@@ -3,19 +3,9 @@
 
 <head>
   <!-- From CDN -->
-  <script async type="module" src="https://unpkg.com/@power-elements/lazy-image/lazy-image.js"></script>
+  <script async defer src='https://unpkg.com/st-img@0.1.1/dist/stimg.js'></script>
   <title>Page title</title>
   <style>
-    html {
-      --lazy-image-width: auto;
-      --lazy-image-height: 300px;
-    }
-
-    lazy-image {
-      display: inline-block;
-      width: var(--lazy-image-width);
-      height: var(--lazy-image-height);
-    }
   </style>
 </head>
 
@@ -27,7 +17,7 @@
       <ul>
         {{#each Media as |media|}}
         <li>
-          Image: <lazy-image src="{{ media.Url }}" alt="lazy image"></lazy-image>
+          Image: <st-img src="{{ media.Url }}" alt="lazy image"></st-img>
         </li>
         {{/each}}
       </ul>
