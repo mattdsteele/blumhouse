@@ -4,8 +4,6 @@ module.exports = async () => {
     projectId: 'blumhouse'
   });
   const query = store.createQuery('Tweet-firedhuskers').order('Date');
-  const [res, more] = await store.runQuery(query);
-  console.log('more', Object.keys(res[0]));
-  console.log(more.moreResults);
-  return res;
+  const [res, _more] = await store.runQuery(query);
+  return res.map(r => JSON.stringify(r));
 };

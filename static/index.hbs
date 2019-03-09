@@ -4,27 +4,16 @@
 <head>
   <!-- From CDN -->
   <script async defer src='https://unpkg.com/st-img@0.1.1/dist/stimg.js'></script>
+  <script type="module" defer src="assets/tweet-archive.js"></script>
   <title>Page title</title>
   <style>
   </style>
 </head>
 
 <body>
-  <ul>
-    {{#each tweets}}
-    <li>{{ Text }}
-      {{#if Media }}
-      <ul>
-        {{#each Media as |media|}}
-        <li>
-          Image: <st-img src="{{ media.Url }}" alt="lazy image"></st-img>
-        </li>
-        {{/each}}
-      </ul>
-      {{/if}}
-    </li>
-    {{/each}}
-  </ul>
+  {{#each tweets as |tweet|}}
+  <tweet-archive data="{{tweet}}"></tweet-archive>
+  {{/each}}
 </body>
 
 </html>
