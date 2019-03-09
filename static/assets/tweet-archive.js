@@ -1,7 +1,11 @@
 import { html, render } from 'https://unpkg.com/lit-html?module';
 import { Autolinker } from 'https://unpkg.com/autolinker?module';
 
-const al = new Autolinker({ truncate: 30 });
+const al = new Autolinker({
+  truncate: 30,
+  mention: 'twitter',
+  hashtag: 'twitter'
+});
 class TweetArchive extends HTMLElement {
   connectedCallback() {
     const data = JSON.parse(this.getAttribute('data'));
