@@ -2,13 +2,37 @@
 <html>
 
 <head>
+  <!-- From CDN -->
+  <script async type="module" src="https://unpkg.com/@power-elements/lazy-image/lazy-image.js"></script>
   <title>Page title</title>
+  <style>
+    html {
+      --lazy-image-width: auto;
+      --lazy-image-height: 300px;
+    }
+
+    lazy-image {
+      display: inline-block;
+      width: var(--lazy-image-width);
+      height: var(--lazy-image-height);
+    }
+  </style>
 </head>
 
 <body>
   <ul>
     {{#each tweets}}
-    <li>{{ Text }}</li>
+    <li>{{ Text }}
+      {{#if Media }}
+      <ul>
+        {{#each Media as |media|}}
+        <li>
+          Image: <lazy-image src="{{ media.Url }}" alt="lazy image"></lazy-image>
+        </li>
+        {{/each}}
+      </ul>
+      {{/if}}
+    </li>
     {{/each}}
   </ul>
 </body>
