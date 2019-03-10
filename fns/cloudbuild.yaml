@@ -11,6 +11,7 @@ steps:
         'go111',
         '--entry-point',
         'CloudPurge'
+      ]
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       [
@@ -23,4 +24,5 @@ steps:
         'go111',
         '--entry-point',
         'CloudPurge'
+      ]
 ]
