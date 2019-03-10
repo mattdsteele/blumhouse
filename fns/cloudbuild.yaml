@@ -1,0 +1,26 @@
+steps:
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      [
+        'functions',
+        'deploy',
+        'purge-mattdsteele',
+        '--trigger-event',
+        'blumhouse',
+        '--runtime',
+        'go111',
+        '--entry-point',
+        'CloudPurge'
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      [
+        'functions',
+        'deploy',
+        'purge-firedhuskers',
+        '--trigger-event',
+        'blumhouse',
+        '--runtime',
+        'go111',
+        '--entry-point',
+        'CloudPurge'
+]

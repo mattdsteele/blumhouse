@@ -2,6 +2,7 @@ package blumhouse
 import (
 	"context"
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -12,13 +13,13 @@ type Message struct {
 	Data []byte `json:"data"`
 }
 
-func TwitterPurgeFiredHuskers(ctx context.Context, m Message) error {
+func CloudPurge(ctx context.Context, m Message) error {
 	payload := string(m.Data)
 	params := strings.Split(payload, ",")
 	tweetsToDelete, _ := strconv.Atoi(params[0])
 	daysToKeep, _ := strconv.Atoi(params[1])
 	fmt.Println(payload)
-	InitArchiver("firedhuskers").ArchiveTweets(tweetsToDelete, daysToKeep)
+	InitArchiver(os.Getenv("TWITTER_USER")).ArchiveTweets(tweetsToDelete, daysToKeep)
 	return nil
 }
 
