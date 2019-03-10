@@ -1,0 +1,25 @@
+steps:
+  - id: install_packages
+    dir: 'static'
+    name: 'gcr.io/cloud-builders/npm'
+    args:
+      - 'install'
+  - id: build
+    dir: 'static'
+    name: 'gcr.io/cloud-builders/npm'
+    args:
+      - 'run'
+      - 'build'
+  - id: deploy
+    dir: 'static'
+    name: gcr.io/cloud-builders/gsutil
+    args:
+      [
+        '-m',
+        'rsync',
+        '-r',
+        '-c',
+        '-d',
+        '_dist',
+        'gs://twitter-archive.steele.blue',
+      ]
