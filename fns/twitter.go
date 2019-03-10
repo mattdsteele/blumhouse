@@ -19,14 +19,15 @@ type Media struct {
 	DisplayUrl string
 }
 
+// Id should be strings?? 64 bit not big enough lol
 type Tweet struct {
-	Id           int64
+	Id           string
 	Text         string
 	Date         time.Time
 	FaveCount    int
 	RetweetCount int
 	IsRetweet    bool
-	ReplyToId    int64
+	ReplyToId    string
 	Media        []*Media
 	Location     string
 }
@@ -68,11 +69,11 @@ func asMedia(entities anaconda.Entities) (media []*Media) {
 	return media
 }
 func asTweet(at anaconda.Tweet) (tweet Tweet) {
-	tweet.Id = at.Id
+	tweet.Id = strconv.FormatInt(at.Id, 10)
 	tweet.FaveCount = at.FavoriteCount
 	tweet.IsRetweet = at.RetweetedStatus != nil
 	tweet.RetweetCount = at.RetweetCount
-	tweet.ReplyToId = at.InReplyToStatusID
+	tweet.ReplyToId = strconv.FormatInt(at.InReplyToStatusID, 10)
 	date, _ := at.CreatedAtTime()
 	tweet.Date = date
 	tweet.Media = asMedia(at.ExtendedEntities)

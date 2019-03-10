@@ -4,6 +4,6 @@ import (
 )
 
 func main() {
-	blumhouse.InitArchiver("firedhuskers").ArchiveTweets(1, 0)
+	blumhouse.InitArchiver("mattdsteele").ArchiveTweets(2, 1)
 }
 

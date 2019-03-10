@@ -1,6 +1,7 @@
 package blumhouse
 import (
 	"fmt"
+	"strconv"
 	"sync"
 	"time"
 )
@@ -68,7 +69,8 @@ func (a Archiver) Archive(tweet Tweet, wg *sync.WaitGroup) {
 	}()
 	mediaWg.Wait()
 	a.datastore.Persist(tweet)
-	a.twitter.Delete(tweet.Id)
+	id, _ := strconv.ParseInt(tweet.Id, 0, 64)
+	a.twitter.Delete(id)
 	fmt.Println("Done with", tweet.Id)
 }
 
