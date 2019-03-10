@@ -10,7 +10,7 @@ steps:
         '--runtime',
         'go111',
         '--entry-point',
-        'CloudPurge'
+        'CloudPurge',
       ]
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
@@ -23,6 +23,5 @@ steps:
         '--runtime',
         'go111',
         '--entry-point',
-        'CloudPurge'
+        'CloudPurge',
       ]
-]
