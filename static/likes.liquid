@@ -1,0 +1,31 @@
+---
+pagination:
+  data: tweets
+  size: 1
+  alias: subtweets
+  resolve: values
+permalink: likes/{{ pagination.items[0].faveCount | slug }}/index.html
+---
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- From CDN -->
+  <script async defer src='https://unpkg.com/st-img@0.1.1/dist/stimg.js'></script>
+  <script type="module" defer src="/assets/tweet-archive.js"></script>
+  <title>Page title</title>
+  <style>
+  </style>
+</head>
+
+<body>
+  {% for href in pagination.hrefs %}
+    <a href="{{href}}">{{ href | yearFromUrl }}</a>
+  {% endfor %}
+  <h2>{{ subtweets.faveCount }} Faves</h2>
+  {% for tweet in subtweets.data %}
+    <tweet-archive data="{{ tweet | escape }}"></tweet-archive>
+  {% endfor %}
+</body>
+
+</html>

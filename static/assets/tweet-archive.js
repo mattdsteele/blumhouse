@@ -29,6 +29,9 @@ class TweetArchive extends HTMLElement {
           .retweet {
             color: blue;
           }
+          .faves {
+            color: #333;
+          }
         </style>
         <div>
           <p class="text" .innerHTML=${al.link(data.Text)}></p>
@@ -54,6 +57,7 @@ class TweetArchive extends HTMLElement {
                 >
               `
             : null}
+          <p class="faves">${this.data.FaveCount} Faves</p>
         </div>
       `;
   }
