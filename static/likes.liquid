@@ -4,7 +4,7 @@ pagination:
   size: 1
   alias: subtweets
   resolve: values
-permalink: likes/{{ pagination.items[0].faveCount | slug }}/index.html
+permalink: /{{ pagination.items[0].year | slug }}/index.html
 ---
 <!DOCTYPE html>
 <html>
@@ -22,7 +22,7 @@ permalink: likes/{{ pagination.items[0].faveCount | slug }}/index.html
   {% for href in pagination.hrefs %}
     <a href="{{href}}">{{ href | yearFromUrl }}</a>
   {% endfor %}
-  <h2>{{ subtweets.faveCount }} Faves</h2>
+  <h2>{{ subtweets.year }}</h2>
   {% for tweet in subtweets.data %}
     <tweet-archive data="{{ tweet | escape }}"></tweet-archive>
   {% endfor %}

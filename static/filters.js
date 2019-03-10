@@ -1,3 +1,3 @@
 module.exports.yearFromUrl = slug => {
-  return /likes\/(.*)\//.exec(slug)[1];
+  return /\/(.*)\//.exec(slug)[1];
 };

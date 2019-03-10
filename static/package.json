@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "DEBUG=Eleventy* eleventy --serve"
+    "start": "eleventy --serve"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +12,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^0.7.1",
     "@google-cloud/datastore": "^3.1.2",
+    "date-fns": "^2.0.0-alpha.27",
     "lodash": "^4.17.11"
   }
 }
