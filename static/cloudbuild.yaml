@@ -10,6 +10,8 @@ steps:
     args:
       - 'run'
       - 'build'
+    env:
+      - TWITTER_USER=mattdsteele
   - id: deploy
     dir: 'static'
     name: gcr.io/cloud-builders/gsutil
