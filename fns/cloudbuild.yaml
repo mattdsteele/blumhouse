@@ -1,5 +1,6 @@
 steps:
   - name: 'gcr.io/cloud-builders/gcloud'
+    dir: 'fns'
     args:
       [
         'functions',
@@ -13,6 +14,7 @@ steps:
         'CloudPurge',
       ]
   - name: 'gcr.io/cloud-builders/gcloud'
+    dir: 'fns'
     args:
       [
         'functions',
