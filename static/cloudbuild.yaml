@@ -20,6 +20,6 @@ steps:
         '-r',
         '-c',
         '-d',
-        '_dist',
+        '_site',
         'gs://twitter-archive.steele.blue',
       ]
