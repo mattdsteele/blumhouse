@@ -1,16 +1,18 @@
 package blumhouse
 import (
 	"fmt"
+	"os"
 	"strconv"
 	"sync"
 	"time"
 )
 
 type Archiver struct {
-	twitter    Twitter
-	storage    Storage
-	datastore  Datastore
-	screenname string
+	twitter     Twitter
+	storage     Storage
+	datastore   Datastore
+	screenname  string
+	safeTweetId string
 }
 
 func InitArchiver(screenname string) (archiver Archiver) {
@@ -18,6 +20,8 @@ func InitArchiver(screenname string) (archiver Archiver) {
 	archiver.datastore = MakeStore(screenname)
 	archiver.storage = Init(screenname + "-tweet-media")
 	archiver.screenname = screenname
+	safeTweet := os.Getenv("BLUMHOUSE_WHITELISTED_TWEET_ID")
+	archiver.safeTweetId = safeTweet
 	return archiver
 }
 
@@ -35,7 +39,10 @@ func (a Archiver) GetTweets(numTweets, daysToDelete int) (tweets []Tweet) {
 	safeTweets := 0
 	allTweets := a.twitter.ToTweets(a.twitter.Timeline(a.screenname, numTweets))
 	for _, tweet := range allTweets {
-		if tweet.Date.Before(safeTweetTime) {
+		if tweet.Id == a.safeTweetId {
+			fmt.Println("Saving whitelisted tweet")
+			safeTweets++
+		} else if tweet.Date.Before(safeTweetTime) {
 			tweets = append(tweets, tweet)
 		} else {
 			safeTweets++

@@ -1,9 +1,11 @@
 package main
 import (
+	"os"
+
 	"github.com/mattdsteele/blumhouse"
 )
 
 func main() {
-	blumhouse.InitArchiver("mattdsteele").ArchiveTweets(2, 1)
+	blumhouse.InitArchiver(os.Getenv("TWITTER_USER")).ArchiveTweets(3, 1)
 }
 

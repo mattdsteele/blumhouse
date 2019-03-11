@@ -1,3 +1,4 @@
+# Setup a command for each account you'd like to purge
 steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     dir: 'fns'
