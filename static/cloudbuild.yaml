@@ -1,12 +1,12 @@
 steps:
   - id: install_packages
     dir: 'static'
-    name: 'gcr.io/cloud-builders/npm'
+    name: 'gcr.io/cloud-builders/npm:current'
     args:
       - 'install'
   - id: build
     dir: 'static'
-    name: 'gcr.io/cloud-builders/npm'
+    name: 'gcr.io/cloud-builders/npm:current'
     args:
       - 'run'
       - 'build'
