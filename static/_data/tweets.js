@@ -25,6 +25,5 @@ module.exports = async () => {
     };
     return prev;
   }, {});
-  console.log(vals);
   return vals;
 };
