@@ -4,7 +4,7 @@ Purges old Tweets
 
 ## Why
 
-Blog Post TK
+See https://steele.blue/blumhouse
 
 ## You probably don't want to host this yourself
 
