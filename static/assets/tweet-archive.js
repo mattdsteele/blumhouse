@@ -48,18 +48,19 @@ class TweetArchive extends HTMLElement {
           :host(:hover) .permalink {
             visibility: visible;
           }
+          img {
+            width: 100%;
+          }
         </style>
         <div class="tweet">
           <a class="permalink" href="#${this.data.Id}">#</a>
           <p class="text" .innerHTML=${al.link(data.Text)}></p>
           <span class="date" title="${data.Date}">${data.dateAsStr}</span>
-          <ul>
-            ${this.media.map(
-              m => html`
-                <st-img src="${m.Url}"></st-img>
-              `
-            )}
-          </ul>
+          ${this.media.map(
+            m => html`
+              <st-img src="${m.Url}"></st-img>
+            `
+          )}
           <div class="stats">
             ${this.data.RetweetCount > 0
               ? html`
