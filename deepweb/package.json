@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "btoa": "^1.2.1",
     "enquirer": "^2.3.0",
     "puppeteer": "^1.13.0"
   }
