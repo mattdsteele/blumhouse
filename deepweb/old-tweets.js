@@ -4,7 +4,7 @@ const [username, pw] = [
   process.env.BLUMHOUSE_TWITTER_PW
 ];
 const { prompt } = require('enquirer');
-const getOldTweets = async (year = 2008) => {
+const getOldTweets = async year => {
   const browser = await puppeteer.launch({
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
@@ -17,8 +17,8 @@ const getOldTweets = async (year = 2008) => {
   await page.type('.js-username-field', username);
   await page.type('.js-password-field', pw);
   await page.$('button[type=submit]').then(e => e.press('Enter'));
-  if (page.url().match('login_verification')) {
-    throw new Error('Did not get OTP prompt', page.url());
+  if (!page.url().match('login_verification')) {
+    throw new Error(`Did not get OTP prompt, ${page.url()}`);
   }
   const res = await prompt({
     type: 'input',
@@ -31,6 +31,22 @@ const getOldTweets = async (year = 2008) => {
 
   await page.waitForNavigation();
 
+  const tweetsForMonth = async month => {
+    const query = `from:${username} since:${year}-${month}-01 until:${year}-${month +
+      2}-01`;
+    const tweetsUrl = `https://twitter.com/search?f=tweets&vertical=default&q=${encodeURIComponent(
+      query
+    )}&src=typd`;
+    await page.goto(tweetsUrl);
+    await page.wait(500);
+    const tweetIds = await page.evaluate(() =>
+      [...document.querySelectorAll('[data-tweet-id]')].map(
+        e => e.dataset.tweetId
+      )
+    );
+    return tweetIds;
+  };
+  /*
   const scrollDown = async () => {
     const scrollDelay = 100;
     const previousHeight = await page.evaluate('document.body.scrollHeight');
@@ -43,6 +59,18 @@ const getOldTweets = async (year = 2008) => {
     ]);
     await page.waitFor(scrollDelay);
   };
+  */
+  await [1, 3, 5, 7, 9].reduce(async (prevPromise, month) => {
+    return prevPromise.then(async prev => {
+      console.log(
+        `getting tweets for month ${month}, have ${prev.length} currently`
+      );
+      const tweets = await tweetsForMonth(month);
+      return [...prev, ...tweets];
+    });
+  }),
+    Promise.resolve([]);
+  /*
   const query = `from:${username} since:${year}-01-01 until:${year + 1}-11-11`;
   const tweetsUrl = `https://twitter.com/search?f=tweets&vertical=default&q=${encodeURIComponent(
     query
@@ -58,8 +86,9 @@ const getOldTweets = async (year = 2008) => {
       e => e.dataset.tweetId
     )
   );
+  */
   await browser.close();
-  return tweetIds;
+  return foundTweets;
 };
 
 module.exports = getOldTweets;
