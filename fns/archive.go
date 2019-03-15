@@ -27,6 +27,10 @@ func InitArchiver(screenname string) (archiver Archiver) {
 
 func (a Archiver) ArchiveTweets(numTweets int, daysToDelete int) {
 	tweets := a.GetTweets(numTweets, daysToDelete)
+	a.Arch(tweets)
+}
+
+func (a Archiver) Arch(tweets []Tweet) {
 	var wg sync.WaitGroup
 	wg.Add(len(tweets))
 	for _, tweet := range tweets {
@@ -34,6 +38,7 @@ func (a Archiver) ArchiveTweets(numTweets int, daysToDelete int) {
 	}
 	wg.Wait()
 }
+
 func (a Archiver) GetTweets(numTweets, daysToDelete int) (tweets []Tweet) {
 	safeTweetTime := time.Now().AddDate(0, 0, -daysToDelete)
 	safeTweets := 0

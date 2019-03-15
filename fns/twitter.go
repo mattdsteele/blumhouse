@@ -120,6 +120,15 @@ func (t Twitter) Timeline(user string, numTweets int) []anaconda.Tweet {
 	return timeline
 }
 
+func (t Twitter) Tweet(tweetId string) anaconda.Tweet {
+	id, _ := strconv.ParseInt(tweetId, 0, 64)
+	tweet, err := t.api.GetTweet(id, nil)
+	if err != nil {
+		panic(err)
+	}
+	return tweet
+}
+
 func Auth() Twitter {
 	apiKey := os.Getenv("TWITTER_API_KEY")
 	apiSecret := os.Getenv("TWITTER_API_SECRET")
