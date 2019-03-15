@@ -1,5 +1,6 @@
 package blumhouse
 import (
+	"fmt"
 	"net/url"
 	"os"
 	"strconv"
@@ -120,13 +121,21 @@ func (t Twitter) Timeline(user string, numTweets int) []anaconda.Tweet {
 	return timeline
 }
 
-func (t Twitter) Tweet(tweetId string) anaconda.Tweet {
-	id, _ := strconv.ParseInt(tweetId, 0, 64)
-	tweet, err := t.api.GetTweet(id, nil)
+func (t Twitter) Tweet(tweetIds []string) []anaconda.Tweet {
+	var ids []int64
+	for i, tweetID := range tweetIds {
+		if i < 100 {
+			ID, _ := strconv.ParseInt(tweetID, 0, 64)
+			ids = append(ids, ID)
+		} else {
+			fmt.Println("Ignoring ", tweetID)
+		}
+	}
+	tweets, err := t.api.GetTweetsLookupByIds(ids, nil)
 	if err != nil {
 		panic(err)
 	}
-	return tweet
+	return tweets
 }
 
 func Auth() Twitter {
