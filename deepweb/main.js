@@ -6,6 +6,7 @@ const execFile = util.promisify(require('child_process').execFile);
   oldTweets = await getOldTweets(2009);
   const cmd = '../fns/bin/oldtweets';
   console.log(`archiving ${oldTweets.length} tweets`);
+  console.log(oldTweets);
   try {
     const { stdout, stderr } = await execFile(cmd, oldTweets);
     console.log('stdout:', stdout);

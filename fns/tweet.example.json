@@ -1,0 +1,50 @@
+[ {
+  "retweeted" : false,
+  "source" : "<a href=\"http://tapbots.com/tweetbot\" rel=\"nofollow\">Tweetbot for iΟS</a>",
+  "entities" : {
+    "hashtags" : [ ],
+    "symbols" : [ ],
+    "user_mentions" : [ {
+      "name" : "Marvin Hagemeister ⚛",
+      "screen_name" : "marvinhagemeist",
+      "indices" : [ "0", "16" ],
+      "id_str" : "211868191",
+      "id" : "211868191"
+    }, {
+      "name" : "Zach Leatherman",
+      "screen_name" : "zachleat",
+      "indices" : [ "17", "26" ],
+      "id_str" : "96383",
+      "id" : "96383"
+    }, {
+      "name" : "Eleventy",
+      "screen_name" : "eleven_ty",
+      "indices" : [ "27", "37" ],
+      "id_str" : "949639269433380864",
+      "id" : "949639269433380864"
+    }, {
+      "name" : "Preact",
+      "screen_name" : "preactjs",
+      "indices" : [ "38", "47" ],
+      "id_str" : "743958196138606593",
+      "id" : "743958196138606593"
+    } ],
+    "urls" : [ ]
+  },
+  "display_text_range" : [ "0", "286" ],
+  "favorite_count" : "2",
+  "in_reply_to_status_id_str" : "1104749736274333696",
+  "id_str" : "1104789631869042688",
+  "in_reply_to_user_id" : "211868191",
+  "truncated" : false,
+  "retweet_count" : "0",
+  "id" : "1104789631869042688",
+  "in_reply_to_status_id" : "1104749736274333696",
+  "created_at" : "Sun Mar 10 17:02:28 +0000 2019",
+  "favorited" : false,
+  "full_text" : "@marvinhagemeist @zachleat @eleven_ty @preactjs Are you using Preact components inside an 11ty app? I've been working on a project and am feeding 11ty collection data into vanilla web components via an attribute. It's pretty smooth. Wondering how to do similar with a component library?",
+  "lang" : "en",
+  "in_reply_to_screen_name" : "marvinhagemeist",
+  "in_reply_to_user_id_str" : "211868191"
+}, {
+} ]
