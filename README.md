@@ -22,7 +22,7 @@ Setup a Twitter Developer account and create an app: https://developer.twitter.c
 
 Set the following environment variables:
 
-- `TWITTER_USER` - the user name you want to begin purging
+- `BLUMHOUSE_TWITTER_NAME` - the user name you want to begin purging
 - `TWITTER_API_KEY` - from Twitter API
 - `TWITTER_API_SECRET` - from Twitter API
 - `TWITTER_ACCESS_TOKEN` - from Twitter API
@@ -59,3 +59,7 @@ Setup a new Cloud Scheduler trigger to execute the function periodically through
 In the Cloud Scheduler payload, pass in two values separated by a comma, such as `2,1`. The first value is the number of Tweets to attempt to purge. The second is the number of days of recent Twitter history to preserve.
 
 Next, edit `static/cloudbuild.yaml` and setup another Cloud Build job to deploy to a new static content bucket on commits: https://cloud.google.com/community/tutorials/automated-publishing-cloud-build
+
+### Deleting Older Tweets
+
+You can only get the last 3200 tweets this way. To purge everything, see `fns/cmd/purge2`.

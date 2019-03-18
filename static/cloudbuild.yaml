@@ -11,7 +11,7 @@ steps:
       - 'run'
       - 'build'
     env:
-      - TWITTER_USER=mattdsteele
+      - BLUMHOUSE_TWITTER_NAME=mattdsteele
   - id: deploy
     dir: 'static'
     name: gcr.io/cloud-builders/gsutil

@@ -36,7 +36,7 @@ func main() {
 	buckets := hundredBuckets(tweets)
 	fmt.Println(len(buckets[0]), len(buckets))
 	t := blumhouse.Auth()
-	arch := blumhouse.InitArchiver(os.Getenv("TWITTER_USER"))
+	arch := blumhouse.InitArchiver(os.Getenv("BLUMHOUSE_TWITTER_NAME"))
 
 	for _, tweetBucket := range buckets {
 		tweets := t.ToTweets(t.Tweet(tweetBucket))

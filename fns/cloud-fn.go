@@ -19,7 +19,7 @@ func CloudPurge(ctx context.Context, m Message) error {
 	tweetsToDelete, _ := strconv.Atoi(params[0])
 	daysToKeep, _ := strconv.Atoi(params[1])
 	fmt.Println(payload)
-	InitArchiver(os.Getenv("TWITTER_USER")).ArchiveTweets(tweetsToDelete, daysToKeep)
+	InitArchiver(os.Getenv("BLUMHOUSE_TWITTER_NAME")).ArchiveTweets(tweetsToDelete, daysToKeep)
 	return nil
 }
 

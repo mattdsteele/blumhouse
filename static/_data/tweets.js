@@ -6,7 +6,7 @@ module.exports = async () => {
     projectId: 'blumhouse'
   });
   const query = store
-    .createQuery(`Tweet-${process.env.TWITTER_USER}`)
+    .createQuery(`Tweet-${process.env.BLUMHOUSE_TWITTER_NAME}`)
     .order('Date');
   let [res, _more] = await store.runQuery(query);
   res = res.map(r => {

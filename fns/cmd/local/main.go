@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	blumhouse.InitArchiver(os.Getenv("TWITTER_USER")).ArchiveTweets(3, 1)
+	blumhouse.InitArchiver(os.Getenv("BLUMHOUSE_TWITTER_NAME")).ArchiveTweets(3, 1)
 }
 
