@@ -8,7 +8,7 @@ module.exports = async () => {
   const query = store
     .createQuery(`Tweet-${process.env.BLUMHOUSE_TWITTER_NAME}`)
     .order('Date');
-  let [res, _more] = await store.runQuery(query);
+  let [res, _more] = await store.runQuery(query, { wrapNumbers: true });
   console.log(_more);
   res = res.map(r => {
     return {

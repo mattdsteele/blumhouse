@@ -1,0 +1,106 @@
+GCP stands for Go Computers, Please
+Serverless Go with Cloud Functions
+26 Mar 2019
+
+Matt Steele
+https://steele.blue
+@mattdsteele
+
+* Golang Serverless Options
+
+.link https://aws.amazon.com/lambda/ AWS Lambda
+.link http://fnproject.io/ Oracle FN
+
+A new challenger approaches ☁
+
+* Cloud Functions with Golang
+
+.link https://cloud.google.com/blog/products/application-development/cloud-functions-go-1-11-is-now-a-supported-language
+
+HTTP Trigger
+Event Trigger
+
+* HTTP Triggers
+
+Follow the `http.HandlerFunc` spec
+  
+    // function.go
+    package function
+
+    import "net/http"
+
+    func F(w http.ResponseWriter, r *http.Request) {
+            w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+            w.Write([]byte(r.Header.Get("X-Forwarded-For")))
+    }
+
+* Event Triggers
+
+Response to some event in the cloud
+
+Cloud Storage Event (object create, delete, etc)
+Pub/Sub Event
+
+    import (
+        "context"
+    )
+
+    // PubSubMessage is the payload of a Pub/Sub event. Please refer to the docs for
+    // additional information regarding Pub/Sub events.
+    type Message struct {
+        Data []byte `json:"data"`
+    }
+
+    func CloudPurge(ctx context.Context, m Message) error {
+        payload := string(m.Data)
+    }
+
+* Other interesting bits
+
+Go 1.11 with GO111MODULES support
+Upload source, not binaries
+Environment variables, logging, metrics, etc
+
+* Deploying functions
+
+CLI:
+
+    gcloud functions deploy hello --entry-point HelloWorld --runtime go111 --trigger-http
+
+CI/CD with Google Cloud Build
+Or upload via web console
+
+* Projects
+
+* Wipe my Twitter History (Blumhouse)
+
+.image https://steele.blue/static/70e211322011ab8e6f722652acaf5e43/30374/old-tweets.png
+
+* Arch
+
+.link https://user-images.githubusercontent.com/389077/54504549-173ac300-4902-11e9-9f93-c60f38751522.png Arch
+
+
+* Code
+
+* WTF Moments
+
+Can only get 3200 recent tweets via Twitter's API
+Can get more via search (clunky as hell)
+Download your Twitter archive and let 'er rip
+
+* Pizza Compass
+
+.link https://twitter.com/_developit/status/1100995095145279488
+[[pizza.steele.blue]]
+
+* Arch
+
+.link https://user-images.githubusercontent.com/389077/54886300-9aa16a80-4e54-11e9-9966-fcfb3c39fedd.png Arch
+
+* Code
+
+* WTF Moments
+
+Foursquare free tier max API at 900 requests/day
+🍕 API is weird
