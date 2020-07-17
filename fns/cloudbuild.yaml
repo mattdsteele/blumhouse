@@ -10,7 +10,7 @@ steps:
         '--trigger-topic',
         'blumhouse',
         '--runtime',
-        'go111',
+        'go113',
         '--entry-point',
         'CloudPurge',
       ]
@@ -24,7 +24,7 @@ steps:
         '--trigger-topic',
         'blumhouse',
         '--runtime',
-        'go111',
+        'go113',
         '--entry-point',
         'CloudPurge',
       ]
